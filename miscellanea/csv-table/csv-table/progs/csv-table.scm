@@ -15,7 +15,7 @@
 ;;; split each line into list of strings
 
 (define (line->cell-list line)
-  (string-split line #\,)) ; string-split exists in Guile but does not in Mit Scheme
+  (string-split line csv-table:separator)) ; string-split exists in Guile but does not in Mit Scheme
 
 (define (table->Scheme-list table)
   (map line->cell-list table))
@@ -44,5 +44,11 @@
 
 ;; adapted example of https://ds26gte.github.io/tyscheme/index-Z-H-9.html
 (tm-define (insert-csv-table filename)
-	   (set! filename (url->system filename))
-	   (insert (call-with-input-file  filename file->TeXmacs-wide-tabular)))
+  (set! csv-table:separator #\,)
+  ;; use cmd argument of dialogue windows to read data file and turn it into table
+  (dialogue-window start-file-to-table (lambda (arg) (insert-csv-table-helper filename)) "Choose separator"))
+
+(tm-define (insert-csv-table-helper filename)
+  (set! filename (url->system filename))
+  (insert (call-with-input-file  filename
+	    file->TeXmacs-wide-tabular)))

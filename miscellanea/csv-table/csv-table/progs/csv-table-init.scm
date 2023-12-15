@@ -17,6 +17,31 @@
 	     ===
 	     (text "or big-table environment"))))
 
+(tm-define csv-table:separator  #\,)
+
+(tm-define csv-table:separator-list
+  `(("," . ,#\,) (";" . ,#\;) ("tab" . ,#\tab)))
+
+;; (tm-widget (set-separator)
+;;   (resize "200px" "50px"
+;;     (scrollable
+;;       (choice (set! csv-table:separator (car (string->list answer)))
+;; 	      '("," ";" "\t")
+;; 	      ","))))
+
+(tm-widget (set-separator)
+  (resize "200px" "50px"
+    (scrollable
+      (choice (set! csv-table:separator (cdr (assoc answer csv-table:separator-list)))
+	      '("," ";" "tab")
+	      ","))))
+
+;; Need a widget to launch the reading from the file once that a choice has
+;; been made
+(tm-widget (start-file-to-table cmd)
+  (dynamic (set-separator))
+  (bottom-buttons >> ("Ok" (cmd "Ok"))))
+
 
 ;; Map "t a b l e tab" to either a message for the user, if the cursor is outside
 ;; all of the environments where it is expected to work, or to the insertion of
@@ -33,8 +58,6 @@
  (:require (csv-table-condition))
  ("t a b l e tab" (choose-file insert-csv-table "choose table file" "")))
 
-
-;; force loading of menu
 (lazy-define-force insert-table-menu)
 
 
@@ -43,6 +66,3 @@
 	 ---
 	 (when (csv-table-condition)
 	   ("Insert table from csv file" (choose-file insert-csv-table "choose table file" ""))))
-
-
-
