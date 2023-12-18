@@ -1,6 +1,6 @@
 (texmacs-module (csv-table-init))
 
-(use-modules (csv-table))
+(use-modules (csv-table)) ;; for the function insert-csv-table
 
 ;; Mode definitions
 ;; See Scheme developer guide, p. 28
@@ -20,7 +20,7 @@
 (tm-define csv-table:separator  #\,)
 
 (tm-define csv-table:separator-list
-  `(("," . ,#\,) (";" . ,#\;) ("tab" . ,#\tab)))
+  `(("," . ,#\,) (";" . ,#\;) ("tab" . ,#\tab) ("space" . ,#\space)))
 
 ;; (tm-widget (set-separator)
 ;;   (resize "200px" "50px"
@@ -30,10 +30,10 @@
 ;; 	      ","))))
 
 (tm-widget (set-separator)
-  (resize "200px" "50px"
+  (resize "200px" "100px"
     (scrollable
       (choice (set! csv-table:separator (cdr (assoc answer csv-table:separator-list)))
-	      '("," ";" "tab")
+	      '("," ";" "tab" "space")
 	      ","))))
 
 ;; Need a widget to launch the reading from the file once that a choice has

@@ -1,5 +1,6 @@
 (texmacs-module (csv-table))
 
+
 ;;; read table from file into list of strings, one per line
 
 (define (add-line-recursive data-port lines)
@@ -14,8 +15,27 @@
 
 ;;; split each line into list of strings
 
+;; https://stackoverflow.com/questions/6169212/removing-repeated-characters-from-a-string-in-scheme
+;; https://stackoverflow.com/a/6169419
+;; Version without tail recursion (it has to act on short lists)
+;; Acts on blanks only (the original function acts on all characters)
+(define (remove-repeat-blanks str)
+  (list->string (remove-repeat-blanks/list (string->list str))))
+
+(define (remove-repeat-blanks/list xs)
+  (cond
+    ((null? xs) xs)
+    ((null? (cdr xs)) xs)
+    ((and (equal? (car xs) #\space) (equal? (car xs) (cadr xs))) (remove-repeat-blanks/list (cdr xs)))
+    (else (cons (car xs) (remove-repeat-blanks/list (cdr xs))))))
+
+
 (define (line->cell-list line)
-  (string-split line csv-table:separator)) ; string-split exists in Guile but does not in Mit Scheme
+  (if (equal? csv-table:separator #\space)
+      (set! line (remove-repeat-blanks line)))
+  (string-split line csv-table:separator)) ; string-split exists in Guile but
+					; does not in Mit Scheme
+
 
 (define (table->Scheme-list table)
   (map line->cell-list table))
