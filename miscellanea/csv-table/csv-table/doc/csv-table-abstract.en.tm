@@ -3,16 +3,18 @@
 <style|<tuple|tmdoc|pagella-font|SIUnits_v02|old-lengths>>
 
 <\body>
-  <tmdoc-title|The <name|csv-table> package>
+  <tmdoc-title|The <name|csv-table> plugin>
 
   The <verbatim|csv-table> plugin provides a keyboard shortcut to import a
-  .csv file into a TeXmacs document as a table.
+  <shell|.csv> file into a TeXmacs document as a table.
 
-  Upon typing of \ the key combination (keyboard shortcut) \P<kbd|table
-  tab>\Q (that is, type \Ptable\Q followed by a tab) the plugin will present
+  Upon typing of \ the key combination (keyboard shortcut) <key|t a b l e
+  tab> \ (that is, type \Ptable\Q followed by a tab) the plugin will present
   a file selection window, will ask what is the field delimiter, and will
   import in the document the contents of the selected file as a table,
-  placing the table at the cursor position.
+  placing the table at the cursor position. There is a menu item as well
+  (<menu|Insert|Table|Insert table from csv file>) which at the moment (Dec.
+  2023) is buggy: it works only the first time it is used.
 
   The keyboard shortcut executes the import function only if the cursor is in
   plain text or in a big-table <em|environment> (but not inside a table!),

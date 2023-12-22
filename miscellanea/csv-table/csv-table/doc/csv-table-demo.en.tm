@@ -3,16 +3,19 @@
 <style|<tuple|tmdoc|csvTable>>
 
 <\body>
-  <doc-data|<doc-title|The csvTable plugin>>
+  <doc-data|<doc-title|The <verbatim|csv-table> plugin>>
 
   <abstract-data|<\abstract>
-    The csvTable plugin provides a keyboard shortcut to import a .csv file
-    into a TeXmacs document as a table.
+    The <verbatim|csv-table> plugin provides a keyboard shortcut to import a
+    <shell|.csv> file into a TeXmacs document as a table.
 
-    Upon typing of \ the key combination (keyboard shortcut) \Pt a b l e
-    tab\Q (that is, type \Ptable\Q followed by a tab) the plugin will present
-    a file selection window and will import in the document the contents of
-    the selected file as a table, placing the table at the cursor position.
+    Upon typing of \ the key combination (keyboard shortcut) <key|t a b l e
+    tab> \ (that is, type \Ptable\Q followed by a tab) the plugin will
+    present a file selection window, will ask what is the field delimiter,
+    and will import in the document the contents of the selected file as a
+    table, placing the table at the cursor position. There is a menu item as
+    well (<menu|Insert|Table|Insert table from csv file>) which at the moment
+    (Dec. 2023) is buggy: it works only the first time it is used.
 
     The keyboard shortcut executes the import function only if the cursor is
     in plain text or in a big-table <em|environment> (but not inside a
@@ -45,9 +48,8 @@
 
   <with|color|blue|<hrule>>
 
-  <math|a*b=c> <math|<with|color|blue|\<Longleftarrow\>>> if one types
-  \ <key|t a b l e tab> inside a math environment (e.g. the one on the left
-  of the arrow) the plugin will issue a warning and will not offer the file
+  If one types \ <key|t a b l e tab> inside a math environment (e.g.
+  <math|a*b=c>) the plugin will issue a warning and will not offer the file
   selection window.
 </body>
 
