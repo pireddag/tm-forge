@@ -59,7 +59,7 @@
    (dialogue-window
     csv-table-message-widget
     (lambda (arg) (noop))
-    "Insert table message")))
+    "csv-table message")))
 
 (kbd-map
   (:require (csv-table-condition))
