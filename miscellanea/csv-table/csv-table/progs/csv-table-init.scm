@@ -10,12 +10,17 @@
 
 ;; With this Widget we issue a message to the user when the function is used outside
 ;; the planned environments
-(tm-widget (csv-table-message-widget)
+(tm-widget (csv-table-message-widget cmd)
 	   (vlist
 	    (centered
 	     (text "Please insert table in plain text")
 	     ===
-	     (text "or big-table environment"))))
+	     (text "or big-table environment")))
+	   (bottom-buttons >> ("Ok" (cmd "Ok"))))
+
+
+
+
 
 (tm-define csv-table:separator  #\,)
 
@@ -43,14 +48,16 @@
 
 (tm-define (csv-table-condition) (and  (or (in-text?) (in-big-table?)) (not (in-table?))))
 
+
+
 (kbd-map
  ("t a b l e tab"
-  (top-window csv-table-message-widget "Insert table message")))
+  (dialogue-window csv-table-message-widget (lambda (arg) (noop)) "Insert table message")))
 
 
 (kbd-map
- (:require (csv-table-condition))
- ("t a b l e tab" (choose-file insert-csv-table "choose table file" "")))
+  (:require (csv-table-condition))
+  ("t a b l e tab" (choose-file insert-csv-table "choose table file" "")))
 
 (lazy-define-force insert-table-menu)
 
