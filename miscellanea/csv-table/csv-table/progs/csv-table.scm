@@ -7,6 +7,9 @@
 ;; e.g. file->TeXmacs-table
 ;; I could have e.g. table->TeXmacs-Scheme-wide-tabular
 
+;; Rename
+;; start-file-to-table -> dialogue-file-to-table
+
 
 ;; Uses guile-csv
 ;; Copyright (C) 2008, 2012, 2013 

@@ -3,6 +3,7 @@
 ;; Copyright (C) 2008, 2012, 2013 
 ;; Andy Wingo <wingo at pobox dot com>
 ;; Nala Ginrut <nalaginrut@gmail.com>
+;; https://github.com/NalaGinrut/guile-csv/tree/master
 
 ;; Adapted for the TeXmacs plugin csv-table by
 ;; Giovanni Piredda <pireddag at posteo dot de>
