@@ -1,47 +1,26 @@
-(texmacs-module (csv-table))
+(texmacs-module (csv-table)
+  (:use (csv-table-parse)))
 
 
-;;; read table from file into list of strings, one per line
+;; Uses guile-csv
+;; Copyright (C) 2008, 2012, 2013 
+;; Andy Wingo <wingo at pobox dot com>
+;; Nala Ginrut <nalaginrut@gmail.com>
+;; to read the csv file into a list of lists
 
-(define (add-line-recursive data-port lines)
-  (let ((line-in (read-line data-port)))
-    (if (eof-object? line-in)
-	lines
-	(add-line-recursive data-port (cons line-in lines))
-	)))
 
+;; ===
+;; read csv file into a list of lists
+
+;; use the code from guile-csv
+;; got from module csv-table-parse
 (define (read-table data-port)
-  (reverse (add-line-recursive data-port '())))
-
-;;; split each line into list of strings
-
-;; https://stackoverflow.com/questions/6169212/removing-repeated-characters-from-a-string-in-scheme
-;; https://stackoverflow.com/a/6169419
-;; Version without tail recursion (it has to act on short lists)
-;; Acts on blanks only (the original function acts on all characters)
-(define (remove-repeat-blanks str)
-  (list->string (remove-repeat-blanks/list (string->list str))))
-
-(define (remove-repeat-blanks/list xs)
-  (cond
-    ((null? xs) xs)
-    ((null? (cdr xs)) xs)
-    ((and (equal? (car xs) #\space) (equal? (car xs) (cadr xs))) (remove-repeat-blanks/list (cdr xs)))
-    (else (cons (car xs) (remove-repeat-blanks/list (cdr xs))))))
+  (with read-csv (make-csv-reader csv-table:separator)
+    (read-csv data-port)))
 
 
-(define (line->cell-list line)
-  (if (equal? csv-table:separator #\space)
-      (set! line (remove-repeat-blanks line))) ;;remove repeat blanks only if
-  ;;the separator is a blank
-  (string-split line csv-table:separator)) ; string-split exists in Guile but
-					; does not in Mit Scheme
-
-
-(define (table->Scheme-list table)
-  (map line->cell-list table))
-
-;;; add TeXmacs markup to list form of the table
+;; ===
+;; get list form of the table and add TeXmacs markup
 
 (define (cell->TeXmacs-Scheme cell-content)
   `(cell ,cell-content))
@@ -53,15 +32,15 @@
   (append `(table) (map row->TeXmacs-Scheme table-content)))
 
 (define (file->TeXmacs-Scheme-table data-port)
-  (table->TeXmacs-Scheme (table->Scheme-list (read-table data-port))))
+  (table->TeXmacs-Scheme (read-table data-port)))
 
-;;; file to TeXmacs wide-tabular
-
+;; data port to TeXmacs wide-tabular
 (define (file->TeXmacs-wide-tabular data-port)
   (stree->tree `(wide-tabular ,(file->TeXmacs-Scheme-table data-port))))
 
 
-;;; transform file into table and insert into TeXmacs document
+;; ===
+;; transform file into TeXmacs table and insert into TeXmacs document
 
 ;; adapted example of https://ds26gte.github.io/tyscheme/index-Z-H-9.html
 (tm-define (insert-csv-table filename)
