@@ -1,6 +1,12 @@
 (texmacs-module (csv-table)
   (:use (csv-table-parse)))
 
+;;;
+;; file->TeXmacs-wide-tabular needs to do only the high-level transformation
+;; from file to table. It needs to be called in a different way,
+;; e.g. file->TeXmacs-table
+;; I could have e.g. table->TeXmacs-Scheme-wide-tabular
+
 
 ;; Uses guile-csv
 ;; Copyright (C) 2008, 2012, 2013 
@@ -31,12 +37,12 @@
 (define (table->TeXmacs-Scheme table-content)
   (append `(table) (map row->TeXmacs-Scheme table-content)))
 
-(define (file->TeXmacs-Scheme-table data-port)
+(define (data-port->TeXmacs-Scheme-table data-port)
   (table->TeXmacs-Scheme (read-table data-port)))
 
 ;; data port to TeXmacs wide-tabular
-(define (file->TeXmacs-wide-tabular data-port)
-  (stree->tree `(wide-tabular ,(file->TeXmacs-Scheme-table data-port))))
+(define (data-port->TeXmacs-wide-tabular data-port)
+  (stree->tree `(wide-tabular ,(data-port->TeXmacs-Scheme-table data-port))))
 
 
 ;; ===
