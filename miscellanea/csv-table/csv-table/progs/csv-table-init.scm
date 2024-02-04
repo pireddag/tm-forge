@@ -18,30 +18,30 @@
       (text "or big-table environment")))
   (bottom-buttons >> ("Ok" (cmd "Ok"))))
 
-;; Column separators
+;; Default field delimiter
+(tm-define csv-table:delimiter  #\,)
 
-(tm-define csv-table:separator  #\,)
-
-(tm-define csv-table:separator-list
+;; List of field delimiters we recognize in the csv file
+(tm-define csv-table:delimiter-list
   `(("," . ,#\,)
     (";" . ,#\;)
     ("tab" . ,#\tab)
     ("space" . ,#\space)))
 
 
-(tm-widget (set-separator)
+(tm-widget (set-delimiter)
   (resize "200px" "100px"
     (scrollable
       (choice
-       (set! csv-table:separator
-	     (cdr (assoc answer csv-table:separator-list)))
+       (set! csv-table:delimiter
+	     (cdr (assoc answer csv-table:delimiter-list)))
        '("," ";" "tab" "space")
        ","))))
 
 ;; Need a widget to launch the reading from the file once that a choice has
 ;; been made
 (tm-widget (start-file-to-table cmd)
-  (dynamic (set-separator))
+  (dynamic (set-delimiter))
   (bottom-buttons >> ("Ok" (cmd "Ok"))))
 
 

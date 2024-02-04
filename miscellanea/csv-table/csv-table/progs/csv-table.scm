@@ -21,10 +21,10 @@
 ;; ===
 ;; read csv file into a list of lists
 
-;; use the code from guile-csv
-;; got from module csv-table-parse
+;; uses the code from guile-csv
+;; imported from module csv-table-parse
 (define (read-table data-port)
-  (with read-csv (make-csv-reader csv-table:separator)
+  (with read-csv (make-csv-reader csv-table:delimiter)
     (read-csv data-port)))
 
 
@@ -53,9 +53,9 @@
 
 ;; adapted example of https://ds26gte.github.io/tyscheme/index-Z-H-9.html
 (tm-define (insert-csv-table filename)
-  (set! csv-table:separator #\,)
+  (set! csv-table:delimiter #\,)
   ;; use cmd argument of dialogue windows to read data file and turn it into table
-  (dialogue-window start-file-to-table (lambda (arg) (insert-csv-table-helper filename)) "Choose separator"))
+  (dialogue-window start-file-to-table (lambda (arg) (insert-csv-table-helper filename)) "Choose delimiter"))
 
 (tm-define (insert-csv-table-helper filename)
   (set! filename (url->system filename))
