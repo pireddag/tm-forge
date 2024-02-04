@@ -10,9 +10,6 @@
 ;; Rename
 ;; start-file-to-table -> dialogue-file-to-table
 
-;; Should not use variables and widgets tm-defined in csv-table-init (see at
-;; the bottom of the file)
-
 
 ;; Uses guile-csv
 ;; Copyright (C) 2008, 2012, 2013 

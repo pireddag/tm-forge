@@ -1,9 +1,12 @@
 (texmacs-module (csv-table-init))
 
-(use-modules (csv-table)) ;; for the function insert-csv-table
+(use-modules (csv-table)) ;; for the function data-port->TeXmacs-wide-tabular
+
+;; need to explain that guile-csv parses csv files according to standard
 
 ;; ===
 ;; Mode definitions
+
 ;; See Scheme developer guide, p. 28
 (texmacs-modes
   (in-big-table% (inside? 'big-table) in-text%))
