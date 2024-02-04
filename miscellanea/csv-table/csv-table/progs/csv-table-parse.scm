@@ -28,7 +28,7 @@
 ;; Boston, MA  02110-1301,  USA       gnu@gnu.org
 
 (define-module (csv-table-parse)
-  :export-syntax (make-csv-reader)
+  :export (make-csv-reader)
   :use-module ((ice-9 optargs)))
 
 ;; Use Guile syntax rather than TeXmacs syntax for the module definition
