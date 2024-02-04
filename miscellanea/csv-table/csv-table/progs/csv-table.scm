@@ -60,4 +60,4 @@
 (tm-define (insert-csv-table-helper filename)
   (set! filename (url->system filename))
   (insert (call-with-input-file  filename
-	    file->TeXmacs-wide-tabular)))
+	    data-port->TeXmacs-wide-tabular)))
