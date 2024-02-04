@@ -14,6 +14,7 @@
    (or (in-text?) (in-big-table?))
    (not (in-table?))))
 
+
 ;;===
 ;; Delimiters
 
@@ -30,7 +31,6 @@
 
 ;;===
 ;; Widgets
-
 
 ;; Issues a message to the user when the function is used outside
 ;; the planned environments
@@ -52,25 +52,37 @@
        '("," ";" "tab" "space")
        ","))))
 
+;; start-file-to-table
 ;; Launches the reading from the file once a choice has been made
+
+;; It is inserted into insert-csv-table, where
+;; cmd is set to (lambda (arg) (insert-csv-table-helper filename))
+;; In that context, in the call (cmd "Ok") argument "Ok" is ignored and
+;; argument filename is obtained from the function that calls
+;; start-file-to-table
+
 (tm-widget (start-file-to-table cmd)
   (dynamic (set-delimiter))
   (bottom-buttons >> ("Ok" (cmd "Ok"))))
 
+
 ;; ===
 ;; transform file into TeXmacs table and insert into TeXmacs document
+
 ;; uses functions from csv-table
 
-;; adapted example of https://ds26gte.github.io/tyscheme/index-Z-H-9.html
 (define (insert-csv-table filename)
   (set! csv-table:delimiter #\,)
   ;; use cmd argument of dialogue windows to read data file and turn it into table
   (dialogue-window start-file-to-table (lambda (arg) (insert-csv-table-helper filename)) "Choose delimiter"))
 
+;; Automated opening and closing of file ports
+;; see e.g. https://ds26gte.github.io/tyscheme/index-Z-H-9.html#TAG:__tex2page_sec_7.3.1
 (define (insert-csv-table-helper filename)
   (set! filename (url->system filename))
   (insert (call-with-input-file  filename
 	    data-port->TeXmacs-wide-tabular)))
+
 
 ;;===
 ;; User interface
