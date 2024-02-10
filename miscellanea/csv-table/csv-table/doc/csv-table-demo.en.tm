@@ -1,6 +1,6 @@
 <TeXmacs|2.1.1>
 
-<style|<tuple|tmdoc|csvTable>>
+<style|<tuple|tmdoc|csv-table>>
 
 <\body>
   <doc-data|<doc-title|The <verbatim|csv-table> plugin>>
@@ -18,7 +18,7 @@
 
     In addition to the keyboard shortcut, there is a menu item as well
     (<menu|Insert|Table|Insert table from csv file>) which at the moment
-    (Dec. 2023) is buggy: it works only the first time it is used.
+    (Feb. 2024) is buggy: it works only the first time it is used.
 
     The keyboard shortcut executes the import function only if the cursor is
     in plain text or in a big-table <em|environment> (but not inside a
@@ -29,8 +29,9 @@
   </abstract>>
 
   Table inserted in plain text by typing <key|t a b l e tab>, selecting the
-  file <shell|data-scheme-table.txt> contained in the plugin documentation
-  directory, and keeping the comma (default selection) as field delimiter:
+  file <shell|data-scheme-table-comma.txt> contained in the plugin
+  documentation directory, and keeping the comma (default selection) as field
+  delimiter:
 
   <wide-tabular|<tformat|<table|<row|<cell|a >|<cell| b>|<cell|
   c>>|<row|<cell|d>|<cell| e>|<cell| f>>|<row|<cell|g>|<cell| h>|<cell|
@@ -40,9 +41,9 @@
 
   <with|color|blue|<hrule>>
 
-  <\big-table|<wide-tabular|<tformat|<table|<row|<cell|a >|<cell| b>|<cell|
+  <\big-table|<wide-tabular|<table|<row|<cell|a >|<cell| b>|<cell|
   c>>|<row|<cell|d>|<cell| e>|<cell| f>>|<row|<cell|g>|<cell| h>|<cell|
-  i>>>>>>
+  i>>>>>
     Same table inserted in a <markup|big-table> environment. I have deleted
     the table that automatically appears when inserting a <markup|big-table>
     environment through the menu command <menu|Insert|Table|Big table> before
