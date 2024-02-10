@@ -5,7 +5,7 @@
 ;; need to explain that guile-csv parses csv files according to standard
 
 ;; ===
-;; Mode definitions
+;; Definition of mode and condition
 
 ;; See Scheme developer guide, p. 28
 (texmacs-modes
@@ -19,7 +19,7 @@
 
 
 ;;===
-;; Delimiters
+;; csv field delimiters
 
 ;; Default field delimiter
 (tm-define csv-table:delimiter  #\,)
@@ -76,24 +76,27 @@
 
 (define (insert-csv-table filename)
   (set! csv-table:delimiter #\,)
-  ;; use cmd argument of dialogue windows to read data file and turn it into table
-  (dialogue-window start-file-to-table (lambda (arg) (insert-csv-table-helper filename)) "Choose delimiter"))
+  ;; set cmd argument of dialogue window to a lambda that reads the data file
+  ;; and turns it into table without using the argument to the lambda function
+  (dialogue-window start-file-to-table
+		   (lambda (arg) (insert-csv-table-helper filename))
+		   "Choose delimiter"))
 
-;; Automated opening and closing of file ports
+;; Uses automated opening and closing of file ports
 ;; see e.g. https://ds26gte.github.io/tyscheme/index-Z-H-9.html#TAG:__tex2page_sec_7.3.1
 (define (insert-csv-table-helper filename)
   (set! filename (url->system filename))
   (insert (call-with-input-file  filename
-	    data-port->TeXmacs-wide-tabular)))
+	    data-port->tm-wide-tabular)))
 
 
 ;;===
 ;; User interface
 ;; Keymaps and menu items
 
-;; Map "t a b l e tab" to either a message for the user, if the cursor is outside
-;; all of the environments where it is expected to work, or to the insertion of
-;; a table at the cursor position
+;; Map "t a b l e tab" to either a message for the user, if the cursor is
+;; outside all of the environments where it is expected to work, or to the
+;; insertion of a table at the cursor position
 
 (kbd-map
   ("t a b l e tab"
@@ -119,4 +122,7 @@
   ---
   (when (csv-table-condition)
     ("Insert table from csv file"
-     (choose-file insert-csv-table "choose table file" ""))))
+     (choose-file
+      insert-csv-table
+      "choose table file"
+      ""))))

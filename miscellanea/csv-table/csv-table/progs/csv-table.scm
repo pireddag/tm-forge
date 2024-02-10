@@ -1,21 +1,13 @@
 (texmacs-module (csv-table)
   (:use (csv-table-parse)))
 
-;;;
-;; file->TeXmacs-wide-tabular needs to do only the high-level transformation
-;; from file to table. It needs to be called in a different way,
-;; e.g. file->TeXmacs-table
-;; I could have e.g. table->TeXmacs-Scheme-wide-tabular
-
-;; Rename
-;; start-file-to-table -> dialogue-file-to-table
-
-
-;; Uses guile-csv
+;; Uses guile-csv to read the csv file into a list of lists
+;; guile-csv is released under the LGPL v 3.0
+;; with
 ;; Copyright (C) 2008, 2012, 2013 
 ;; Andy Wingo <wingo at pobox dot com>
 ;; Nala Ginrut <nalaginrut@gmail.com>
-;; to read the csv file into a list of lists
+
 
 
 ;; ===
@@ -25,24 +17,35 @@
 ;; imported from module csv-table-parse
 (define (read-table data-port)
   (with read-csv (make-csv-reader csv-table:delimiter)
+;csv-table:delimiter is used as a global variable and it should not
     (read-csv data-port)))
 
 
 ;; ===
-;; get list form of the table and add TeXmacs markup
+;; from list form of the table to TeXmacs markup
+;; markup as wide-tabular
 
-(define (cell->TeXmacs-Scheme cell-content)
+(define (cell->tm-scheme-cell cell-content)
   `(cell ,cell-content))
 
-(define (row->TeXmacs-Scheme row-content)
-  (append `(row) (map cell->TeXmacs-Scheme row-content)))
+(define (row->tm-scheme-row row-content)
+  (append `(row) (map cell->tm-scheme-cell row-content)))
 
-(define (table->TeXmacs-Scheme table-content)
-  (append `(table) (map row->TeXmacs-Scheme table-content)))
+(define (list-of-rows->tm-scheme-table table-content)
+  `(table ,@(map row->tm-scheme-row table-content)))
 
-(define (data-port->TeXmacs-Scheme-table data-port)
-  (table->TeXmacs-Scheme (read-table data-port)))
+(define (list-of-rows->tm-scheme-wide-tabular table-content)
+  `(wide-tabular ,(list-of-rows->tm-scheme-table table-content)))
 
-;; data port to TeXmacs wide-tabular
-(tm-define (data-port->TeXmacs-wide-tabular data-port)
-  (stree->tree `(wide-tabular ,(data-port->TeXmacs-Scheme-table data-port))))
+;; ===
+;; from data port to TeXmacs markup
+
+;; data port to TeXmacs Scheme
+(define (data-port->tm-scheme-wide-tabular data-port)
+  (list-of-rows->tm-scheme-wide-tabular (read-table data-port)))
+
+;; data port to TeXmacs
+(tm-define (data-port->tm-wide-tabular data-port)
+  (stree->tree (data-port->tm-scheme-wide-tabular data-port)))
+
+

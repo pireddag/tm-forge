@@ -16,8 +16,8 @@
   placing the table at the cursor position.
 
   In addition to the keyboard shortcut, there is a menu item as well
-  (<menu|Insert|Table|Insert table from csv file>) which at the moment (Dec.
-  2023) is buggy: it works only the first time it is used.
+  (<menu|Insert|Table|Insert table from csv file>) which at the moment (Feb.
+  2024) is buggy: it works only the first time it is used.
 
   The keyboard shortcut executes the import function only if the cursor is in
   plain text or in a big-table <em|environment> (but not inside a table!),

@@ -10,13 +10,13 @@ The plugin provides a menu item as well, blanked when the import cannot be execu
 
 ## Instructions
 
-To be able to use the function, please place the folder csv-table in your `.TeXmacs/plugin ` folder. 
+To be able to use the function, place the folder csv-table in your `.TeXmacs/plugin ` folder. 
 
-After you do this, you will be able to load the `csv-table` package through the `Document-> Style -> Add package` menu item or through the "plus" icon in the lowest icon bar. 
+After you do this, you will be able to load the `csv-table` package through the `Document -> Style -> Add package` menu item or through the "plus" icon in the lowest icon bar. 
 
 Once the plugin is loaded, you will be able to insert a table contained in a `.csv` file by means of the "t a b l e tab" key combination. If you type "t a b l e tab", TeXmacs will open a file selection window. Upon file selection, you will get a widget asking you to select the column separator (default is comma); once you accept by pressing the OK button, TeXmacs will insert the table contained in the file at the cursor position.
 
-The plugin checks whether the cursor is in plain text or in a `big-table` environment, and opens the file selection window only if the check is positive; if it is not, it issues a warning through the `table-message-widget` widget, which will be closed upon acknowledgement (_id est_ pressure of the "Ok" button). Please pay attention that the widget is not modal, so it will allow you access to your document (_id est_ you can forget that you have an open widget).
+The plugin checks whether the cursor is in plain text or in a `big-table` environment, and opens the file selection window only if the check is positive; if it is not, it issues a warning through the `table-message-widget` widget, which will be closed upon acknowledgement (_id est_ pressure of the "Ok" button). Please pay attention that the widget is not modal, so it will allow you access to your document (_id est_ it may happen that you forget that you have an open widget).
 
 ### Details
 
@@ -36,3 +36,7 @@ If using the shortcut triggers the warning widget (as one used it outside the en
 ## Test files
 
 The repository includes short .csv test files inside the `csv-table\doc` directory, `data-scheme-table-sep.txt`, where `sep` stands for the each column separator. Each test file contains a 3x3 table. 
+
+## Possible improvements
+ 
+* Add optional skipping of header lines

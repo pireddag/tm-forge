@@ -6,12 +6,10 @@
   <tmdoc-title|the <name|csv-table> plugin>
 
   <\traverse>
-    <branch|Short description|csvTable-abstract.en.tm>
+    <branch|Short description|csv-table-abstract.en.tm>
 
-    <branch|Example document|csvTable-demo.en.tm>
+    <branch|Example document|csv-table-demo.en.tm>
   </traverse>
-
-  \;
 </body>
 
 <\initial>
