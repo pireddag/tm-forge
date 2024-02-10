@@ -24,6 +24,8 @@ The shortcut, defined inside the Scheme file `progs/csv-table-init.csm`, execute
 
 Columns can be separated by the following four separators: comma, semicolon, tab and space. If the separator is a space, multiple spaces are collapsed into one.
 
+This plugin uses code from guile-csv, available at https://github.com/NalaGinrut/guile-csv/tree/master and licensed under GPL v.3.0, with a small modification, to read csv files compliant to the rfc4180 specification (https://www.ietf.org/rfc/rfc4180.txt). In particular, guile-csv is able to read quoted fields **as long as the opening quote comes immediately after the separator and the closing quote is the last character of the field**; quoted fields may contain delimiters, quotes and line breaks (see rfc4180 for details).
+
 ## Warnings
 
 The function expects a file with a simple structure, where every row has the same number of entries and **does not do any error-checking**.
@@ -35,7 +37,7 @@ If using the shortcut triggers the warning widget (as one used it outside the en
 
 ## Test files
 
-The repository includes short .csv test files inside the `csv-table\doc` directory, `data-scheme-table-sep.txt`, where `sep` stands for the each column separator. Each test file contains a 3x3 table. 
+The repository includes short .csv test files inside the `csv-table\doc` directory, `data-scheme-table-sep.txt`, where `sep` stands for each of the column separators. Each test file contains a 3x3 table. In addition to these, there is a test file for the reading of a csv file with a quoted field.
 
 ## Possible improvements
  
