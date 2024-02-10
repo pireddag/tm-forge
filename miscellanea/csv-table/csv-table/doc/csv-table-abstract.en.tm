@@ -8,9 +8,9 @@
   The <verbatim|csv-table> plugin provides a keyboard shortcut to import a
   <shell|.csv> file into a TeXmacs document as a table.
 
-  Upon typing of \ the key combination (keyboard shortcut) <key|t a b l e
-  tab> \ (that is, type \Ptable\Q followed by a tab) the plugin will present
-  a file selection window; after the user selects a file, a dialog will ask
+  Upon typing the key combination (keyboard shortcut) <key|t a b l e tab>
+  \ (that is, type \Ptable\Q followed by a tab) the plugin will present a
+  file selection window; after the user selects a file, a dialog will ask
   what is the field delimiter, and upon getting the answer, the plugin will
   import in the document the contents of the selected file as a table,
   placing the table at the cursor position.
