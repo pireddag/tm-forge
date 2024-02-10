@@ -17,14 +17,6 @@ Once the plugin is loaded, you will be able to insert a table contained in a `.c
 
 The plugin checks whether the cursor is in plain text or in a `big-table` environment, and opens the file selection window only if the check is positive; if it is not, it issues a warning through the `table-message-widget` widget, which will be closed upon acknowledgement (_id est_ pressure of the "Ok" button). Please pay attention that the widget is not modal, so it will allow you access to your document (_id est_ it may happen that you forget that you have an open widget).
 
-### Details
-
-The shortcut, defined inside the Scheme file `progs/csv-table-init.csm`, executes the `insert-csv-table` function, defined in the Scheme file `progs/csv-table.csm`, using as function argument the name of the file selected by means of the selection window. The `insert-csv-table` function inserts the data into the current buffer.
-
-Fields can be separated by the following four separators: comma, semicolon, tab and space (single space: multiple spaces are not collapsed into one and interpreted as empty fields).
-
-This plugin uses code from guile-csv, available at https://github.com/NalaGinrut/guile-csv/tree/master and licensed under GPL v.3.0, with a small modification, to read csv files compliant to the rfc4180 specification (https://www.ietf.org/rfc/rfc4180.txt). In particular, guile-csv is able to read quoted fields **as long as the opening quote comes immediately after the separator and the closing quote is the last character of the field**; quoted fields may contain delimiters, quotes and line breaks (see rfc4180 for further details).
-
 ## Warnings
 
 The function expects a file where every row has the same number of entries and **does limited error-checking** (all error-checking in this plugin is done by the code of guile-csv).
@@ -33,6 +25,14 @@ The function expects a file where every row has the same number of entries and *
 
 If using the shortcut triggers the warning widget (as one used it outside the environments where the shortcut is programmed to execute the `insert-csv-table` form), please close the widget before returning to editing your TeXmacs document, as the widget isn't modal---will not block you from editing your document.
 Same for the delimiter-choice widget (which is closed by pressing the `Ok` button).
+
+## Details on code
+
+The shortcut, defined inside the Scheme file `progs/csv-table-init.csm`, executes the `insert-csv-table` function, defined in the Scheme file `progs/csv-table.csm`, using as function argument the name of the file selected by means of the selection window. The `insert-csv-table` function inserts the data into the current buffer.
+
+Fields can be separated by the following four separators: comma, semicolon, tab and space (single space: multiple spaces are not collapsed into one and interpreted as empty fields).
+
+This plugin uses code from guile-csv, available at https://github.com/NalaGinrut/guile-csv/tree/master and licensed under GPL v.3.0, with a small modification, to read csv files compliant to the rfc4180 specification (https://www.ietf.org/rfc/rfc4180.txt). In particular, guile-csv is able to read quoted fields **as long as the opening quote comes immediately after the separator and the closing quote is the last character of the field**; quoted fields may contain delimiters, quotes and line breaks (see rfc4180 for further details).
 
 ## Test files
 
