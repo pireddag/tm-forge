@@ -6,6 +6,7 @@ Miscellaneous materials for TeXmacs
 
 ### List of materials
 
+  * `csv-table` inserts the content of `.csv` files in the current document as table ([dir](./csv-table))
   * A lorem-ipsum generator ([dir](./lorem-ipsum))
   * A tetris game with TeXmacs tables ([dir](./tetris))
   * A document to easily find your `TEXMACS_HOME_PATH` and `TEXMACS_PATH` ([file](https://cdn.jsdelivr.net/gh/texmacs/tm-forge/miscellanea/find-your-texmacs-paths.tm))
