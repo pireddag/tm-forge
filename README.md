@@ -6,6 +6,8 @@ This is a public space to collect and share content related to the [TeXmacs](htt
 Whatever you find useful to share. Note that articles, tutorial and general documentation could be better suited for
 TeXmacs'  [blog](https://texmacs.github.io/notes/ ).
 
+The most straightforward way to download the code is downloading the entire repository via https://github.com/texmacs/tm-forge/archive/refs/heads/main.zip as a zip file. We don't know of a traightforward way to download single folders.
+
 
 ### Main index
 
